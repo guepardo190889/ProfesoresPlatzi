@@ -1,10 +1,14 @@
 package com.blackdeath.profesoresplatzi.configuration;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -17,10 +21,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DataBaseConfiguration {
 
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
+	@Autowired
+	public HibernateTransactionManager getTransactionManager() {
+		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+		hibernateTransactionManager.setSessionFactory(gtSessionFactory().getObject());
+
+		return hibernateTransactionManager;
+	}
+
+	@Bean
+	private LocalSessionFactoryBean gtSessionFactory() {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(getDatSource());
-		sessionFactoryBean.setPackagesToScan("");
+		sessionFactoryBean.setPackagesToScan("com.blackdeath.profesoresplatzi.model");
+		sessionFactoryBean.setHibernateProperties(getHibernateProperties());
 
 		return sessionFactoryBean;
 	}
@@ -34,6 +48,14 @@ public class DataBaseConfiguration {
 		dataSource.setPassword("platziprofesores");
 
 		return dataSource;
+	}
+
+	private Properties getHibernateProperties() {
+		Properties properties = new Properties();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		properties.put("show_sql", "true");
+
+		return properties;
 	}
 
 }
