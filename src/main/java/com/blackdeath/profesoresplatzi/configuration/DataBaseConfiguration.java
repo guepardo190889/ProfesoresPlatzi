@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Seth Luis
+ * 
+ *         Sobre @Bean y @Autowired:
+ *         https://stackoverflow.com/questions/34172888/difference-between-bean-and-autowired
  *
  */
 @Configuration
@@ -30,6 +33,7 @@ public class DataBaseConfiguration {
 	}
 
 	@Bean
+	@Autowired
 	private LocalSessionFactoryBean gtSessionFactory() {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(getDatSource());
