@@ -6,6 +6,7 @@ package com.blackdeath.profesoresplatzi.dao;
 import java.util.List;
 
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
+import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
 /**
  * @author Seth Luis
@@ -44,6 +45,12 @@ public class SocialMediaDaoImp extends AbstractSession implements SocialMediaDao
 
 	@Override
 	public SocialMedia findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TeacherSocialMedia findSocialMediaByIdAndName(Long idSocialMedia, String nickname) {
 		// TODO Auto-generated method stub
 		return null;
 	}

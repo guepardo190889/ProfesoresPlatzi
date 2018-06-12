@@ -3,6 +3,7 @@ package com.blackdeath.profesoresplatzi.dao;
 import java.util.List;
 
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
+import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
 /**
  * @author Seth Luis
@@ -20,4 +21,6 @@ public interface SocialMediaDao {
 	SocialMedia findById(Long idSocialMedia);
 
 	SocialMedia findByName(String name);
+
+	TeacherSocialMedia findSocialMediaByIdAndName(Long idSocialMedia, String nickname);
 }

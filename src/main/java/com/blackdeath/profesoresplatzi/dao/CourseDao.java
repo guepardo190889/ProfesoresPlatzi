@@ -21,4 +21,6 @@ public interface CourseDao {
 
 	Course findByName(String name);
 
+	List<Course> findByIdTeacher(Long idTeacher);
+
 }
