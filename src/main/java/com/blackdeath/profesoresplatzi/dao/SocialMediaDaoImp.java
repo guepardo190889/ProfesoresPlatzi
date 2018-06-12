@@ -19,8 +19,12 @@ public class SocialMediaDaoImp extends AbstractSession implements SocialMediaDao
 	}
 
 	@Override
-	public void deleteSocialMedia(SocialMedia socialMedia) {
+	public void deleteSocialMediaById(Long idSocialMedia) {
+		SocialMedia socialMedia = findById(idSocialMedia);
 
+		if (socialMedia != null) {
+			getSession().delete(socialMedia);
+		}
 	}
 
 	@Override
@@ -31,6 +35,17 @@ public class SocialMediaDaoImp extends AbstractSession implements SocialMediaDao
 	@Override
 	public List<SocialMedia> findAllSocialMedia() {
 		return getSession().createQuery("from SocialMedia", SocialMedia.class).list();
+	}
+
+	@Override
+	public SocialMedia findById(Long idSocialMedia) {
+		return getSession().get(SocialMedia.class, idSocialMedia);
+	}
+
+	@Override
+	public SocialMedia findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

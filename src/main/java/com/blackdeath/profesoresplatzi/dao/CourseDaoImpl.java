@@ -16,18 +16,33 @@ public class CourseDaoImpl extends AbstractSession implements CourseDao {
 	}
 
 	@Override
-	public void deleteSocialMedia(Course course) {
+	public void deleteCourseById(Long idCourse) {
+		Course course = findById(idCourse);
 
+		if (course != null) {
+			getSession().delete(course);
+		}
 	}
 
 	@Override
-	public void updateSocialMedia(Course course) {
+	public void updateCourse(Course course) {
 		getSession().update(course);
 	}
 
 	@Override
 	public List<Course> findAllCourse() {
 		return getSession().createQuery("from Course", Course.class).list();
+	}
+
+	@Override
+	public Course findById(Long idCourse) {
+		return getSession().get(Course.class, idCourse);
+	}
+
+	@Override
+	public Course findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

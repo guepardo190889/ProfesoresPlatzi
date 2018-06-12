@@ -11,9 +11,14 @@ import com.blackdeath.profesoresplatzi.model.Course;
 public interface CourseDao {
 	void saveCourse(Course course);
 
-	void deleteSocialMedia(Course course);
+	void deleteCourseById(Long idCourse);
 
-	void updateSocialMedia(Course course);
+	void updateCourse(Course course);
 
 	List<Course> findAllCourse();
+
+	Course findById(Long idCourse);
+
+	Course findByName(String name);
+
 }
