@@ -1,8 +1,10 @@
 package com.blackdeath.profesoresplatzi.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.blackdeath.profesoresplatzi.model.Teacher;
+import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
 /**
  * @author Seth Luis
@@ -23,6 +25,14 @@ public class TeacherDaoImpl extends AbstractSession implements TeacherDao {
 		Teacher teacher = (Teacher) findById(idTeacher);
 
 		if (teacher != null) {
+			Iterator<TeacherSocialMedia> i = teacher.getTeacherSocialMedias().iterator();
+			
+			while(i.hasNext()) {
+				TeacherSocialMedia teacherSocialMedia = i.next();
+				i.remove();
+				getSession().delete(teacherSocialMedia);
+			}
+			
 			getSession().delete(teacher);
 		}
 	}

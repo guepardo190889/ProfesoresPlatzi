@@ -5,6 +5,7 @@ package com.blackdeath.profesoresplatzi.dao;
 
 import java.util.List;
 
+import com.blackdeath.profesoresplatzi.model.Course;
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
 import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
@@ -45,13 +46,28 @@ public class SocialMediaDaoImp extends AbstractSession implements SocialMediaDao
 
 	@Override
 	public SocialMedia findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery("from SocialMedia where name = :name", SocialMedia.class)
+				.setParameter("name", name).uniqueResult();
 	}
 
 	@Override
 	public TeacherSocialMedia findSocialMediaByIdAndName(Long idSocialMedia, String nickname) {
-		// TODO Auto-generated method stub
+		// la colección de social medias en un índice
+		// la colección de teachers en otro índice
+		List<Object[]> objects = getSession().createQuery(
+				"from TeacherSocialMedia tsm join tsm.socialMedia sm where sm.idSocialMedia = :idSocialMedia and tsm.nickname = :nickname")
+				.setParameter("idSocialMedia", idSocialMedia).setParameter("nickname", nickname).list();
+
+		if (objects.size() > 0) {
+			for (Object[] o : objects) {
+				for (Object o2 : o) {
+					if (o2 instanceof TeacherSocialMedia) {
+						return (TeacherSocialMedia) o2;
+					}
+				}
+			}
+		}
+
 		return null;
 	}
 
