@@ -5,7 +5,10 @@ package com.blackdeath.profesoresplatzi.dao;
 
 import java.util.List;
 
-import com.blackdeath.profesoresplatzi.model.Course;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
 import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
@@ -13,6 +16,8 @@ import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
  * @author Seth Luis
  *
  */
+@Repository
+@Transactional
 public class SocialMediaDaoImp extends AbstractSession implements SocialMediaDao {
 
 	@Override

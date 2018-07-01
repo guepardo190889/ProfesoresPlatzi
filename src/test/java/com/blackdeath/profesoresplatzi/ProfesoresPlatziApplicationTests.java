@@ -1,4 +1,4 @@
-package com.blackdeath;
+package com.blackdeath.profesoresplatzi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

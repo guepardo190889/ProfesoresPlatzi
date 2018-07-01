@@ -3,6 +3,10 @@ package com.blackdeath.profesoresplatzi.dao;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
 import com.blackdeath.profesoresplatzi.model.Teacher;
 import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
 
@@ -10,6 +14,8 @@ import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
  * @author Seth Luis
  *
  */
+@Repository
+@Transactional
 public class TeacherDaoImpl extends AbstractSession implements TeacherDao {
 
 	public TeacherDaoImpl() {
