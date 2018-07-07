@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.platzi.profesoresplatzi.service;
+package com.blackdeath.profesoresplatzi.service;
 
 import java.util.List;
 

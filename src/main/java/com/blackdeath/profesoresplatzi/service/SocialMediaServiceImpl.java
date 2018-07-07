@@ -1,11 +1,14 @@
 /**
  * 
  */
-package com.platzi.profesoresplatzi.service;
+package com.blackdeath.profesoresplatzi.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.blackdeath.profesoresplatzi.dao.SocialMediaDao;
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
@@ -15,6 +18,8 @@ import com.blackdeath.profesoresplatzi.model.TeacherSocialMedia;
  * @author Seth Luis
  *
  */
+@Service("socialMediService")
+@Transactional
 public class SocialMediaServiceImpl implements SocialMediaService {
 
 	@Autowired
