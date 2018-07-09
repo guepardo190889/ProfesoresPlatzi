@@ -8,10 +8,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.blackdeath.profesoresplatzi.model.SocialMedia;
@@ -41,6 +41,22 @@ public class SocialMediaController {
 		return new ResponseEntity<List<SocialMedia>>(socialMedias, HttpStatus.OK);
 	}
 
+	// GET
+	@RequestMapping(value = "/socialMedias/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<SocialMedia> getSocialMediaById(@PathVariable("id") Long idSocialMedia) {
+		if (idSocialMedia <= 0) {
+			return ResponseEntity.noContent().build();
+		}
+
+		SocialMedia socialMedia = socialMediaService.findById(idSocialMedia);
+
+		if (socialMedia == null) {
+			return ResponseEntity.noContent().build();
+		}
+
+		return new ResponseEntity<SocialMedia>(socialMedia, HttpStatus.OK);
+	}
+
 	// POST
 	@RequestMapping(value = "/socialMedias", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<?> createSocialMedia(@RequestBody SocialMedia socialMedia,
@@ -63,8 +79,9 @@ public class SocialMediaController {
 		headers.setLocation(uriComponentsBuilder.path("/v1/socialMedias/{id}")
 				.buildAndExpand(socialMedia2.getIdSocialMedia()).toUri());
 
-		// return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-		return ResponseEntity.created(uriComponentsBuilder.path("/v1/socialMedias/{id}")
-				.buildAndExpand(socialMedia2.getIdSocialMedia()).toUri()).build();
+		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+		// return
+		// ResponseEntity.created(uriComponentsBuilder.path("/v1/socialMedias/{id}")
+		// .buildAndExpand(socialMedia2.getIdSocialMedia()).toUri()).build();
 	}
 }
