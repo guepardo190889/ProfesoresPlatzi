@@ -62,13 +62,11 @@ public class SocialMediaController {
 	public ResponseEntity<?> createSocialMedia(@RequestBody SocialMedia socialMedia,
 			UriComponentsBuilder uriComponentsBuilder) {
 		if (socialMedia.getName() == null || socialMedia.getName().isEmpty()) {
-			// return new ResponseEntity(HttpStatus.NO_CONTENT);
-			return ResponseEntity.noContent().build();
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
 
 		if (socialMediaService.findByName(socialMedia.getName()) != null) {
-			// return new ResponseEntity(HttpStatus.NO_CONTENT);
-			return ResponseEntity.noContent().build();
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
 
 		socialMediaService.saveSocialMedia(socialMedia);
@@ -80,8 +78,5 @@ public class SocialMediaController {
 				.buildAndExpand(socialMedia2.getIdSocialMedia()).toUri());
 
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-		// return
-		// ResponseEntity.created(uriComponentsBuilder.path("/v1/socialMedias/{id}")
-		// .buildAndExpand(socialMedia2.getIdSocialMedia()).toUri()).build();
 	}
 }
