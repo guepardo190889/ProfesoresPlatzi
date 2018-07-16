@@ -62,11 +62,11 @@ public class SocialMediaController {
 	public ResponseEntity<?> createSocialMedia(@RequestBody SocialMedia socialMedia,
 			UriComponentsBuilder uriComponentsBuilder) {
 		if (socialMedia.getName() == null || socialMedia.getName().isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
 		if (socialMediaService.findByName(socialMedia.getName()) != null) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
 		socialMediaService.saveSocialMedia(socialMedia);
